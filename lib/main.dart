@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 
-void main() {
-  runApp(const SplitApp());
-}
+void main() => runApp(const SplitApp());
 
 class SplitApp extends StatelessWidget {
   const SplitApp({super.key});
@@ -26,7 +24,7 @@ class SplitApp extends StatelessWidget {
             stream: accelerometerEventStream(),
             builder: (context, snapshot) {
               return Center(
-                child: Text("value: ${snapshot.data!.y.toStringAsFixed(2)}"),
+                child: Text("value: ${snapshot.data!.y.toStringAsFixed(2)}\n"),
               );
             }
           )
