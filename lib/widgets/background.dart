@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-int Function(double? tilt) toShade = (tilt) {
-  double res = (tilt ?? 0).abs();
-  if (res > 2) res = 2;
-  return ((res * 450) ~/ 100) * 100;
-};
+import 'package:split/extensions/tilt.dart';
 
 class Background extends StatelessWidget {
   final int rightShade;
@@ -13,8 +9,8 @@ class Background extends StatelessWidget {
   const Background._(this.rightShade, this.leftShade);
 
   factory Background(double? tilt) => (tilt ?? 0) >= 0
-      ? Background._(toShade(tilt), 0)
-      : Background._(0, toShade(tilt));
+      ? Background._(tilt.toShade(), 0)
+      : Background._(0, tilt.toShade());
 
   @override
   Widget build(BuildContext context) => Row(
