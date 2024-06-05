@@ -1,46 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
-import 'package:split/extensions/calibration.dart';
-import 'package:split/extensions/theme_access.dart';
-import 'package:split/widgets/background.dart';
-import 'package:split/widgets/menu_button.dart';
-import 'package:split/config/theme.dart';
 
-class SplitApp extends StatelessWidget {
+import 'package:split/config/theme.dart';
+import 'package:split/extensions/calibration.dart';
+import 'package:split/widgets/background.dart';
+import 'package:split/widgets/content.dart';
+import 'package:split/widgets/menu_button.dart';
+import 'package:split/enums/mode.dart';
+
+class SplitApp extends StatefulWidget {
   const SplitApp({super.key});
+
+  @override
+  State<SplitApp> createState() => _SplitAppState();
+}
+
+class _SplitAppState extends State<SplitApp> {
+  Content? content;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
     theme: theme,
     home: StreamBuilder<AccelerometerEvent>(
       stream: accelerometerEventStream(),
-      builder: (context, snapshot) {
-        return Scaffold(
-          floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-          floatingActionButton: const MenuButton(),
-          body: Stack(
-            children: <Widget>[
-              Background(snapshot.fixedY),
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("value: ${snapshot.fixedY
-                          ?.toStringAsFixed(2) ?? "Loading..."}",
-                      style: context.texts.labelLarge
-                    ),
-                    const SizedBox(height: 50),
-                    ElevatedButton(
-                        onPressed: () => snapshot.calibrate(),
-                        child: const Text("Calibration")
-                    )
-                  ],
-                ),
-              )
-            ],
+      builder: (context, snapshot) => Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+        floatingActionButton: MenuButton(
+          onModeChange: (mode) => setState(
+              () => content = Content(mode, snapshot)
           ),
-        );
-      }
+        ),
+        body: Stack(
+          children: <Widget>[
+            Background(snapshot.fixedY),
+            content ?? Content(Mode.split, snapshot),
+          ],
+        ),
+      ),
     ),
   );
 }
