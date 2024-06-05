@@ -6,7 +6,7 @@ extension Calibration on AsyncSnapshot<AccelerometerEvent> {
 
   void calibrate() => _fix = data == null ? 0 : data!.y;
 
-  String get fixedY => data == null
-      ? "Loading..."
-      : (data!.y - _fix).toStringAsFixed(2);
+  double? get fixedY => data == null
+      ? null
+      : data!.y - _fix;
 }

@@ -11,32 +11,35 @@ class SplitApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     theme: theme,
-    home: Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
-      floatingActionButton: const MenuButton(),
-      body: Stack(
-        children: <Widget>[
-          const Background(),
-          StreamBuilder<AccelerometerEvent>(
-            stream: accelerometerEventStream(),
-            builder: (context, snapshot) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("value: ${snapshot.fixedY}",
+    home: StreamBuilder<AccelerometerEvent>(
+      stream: accelerometerEventStream(),
+      builder: (context, snapshot) {
+        return Scaffold(
+          floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+          floatingActionButton: const MenuButton(),
+          body: Stack(
+            children: <Widget>[
+              Background(snapshot.fixedY),
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("value: ${snapshot.fixedY
+                          ?.toStringAsFixed(2) ?? "Loading..."}",
                       style: Theme.of(context).textTheme.labelLarge
-                  ),
-                  const SizedBox(height: 50),
-                  ElevatedButton(
-                      onPressed: () => snapshot.calibrate(),
-                      child: const Text("Calibration")
-                  )
-                ],
-              ),
-            )
-          )
-        ],
-      ),
+                    ),
+                    const SizedBox(height: 50),
+                    ElevatedButton(
+                        onPressed: () => snapshot.calibrate(),
+                        child: const Text("Calibration")
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        );
+      }
     ),
   );
 }
