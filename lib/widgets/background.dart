@@ -9,8 +9,8 @@ class Background extends StatelessWidget {
   const Background._(this.rightShade, this.leftShade);
 
   factory Background(double? tilt) => (tilt ?? 0) >= 0
-      ? Background._(tilt.toShade(), 0)
-      : Background._(0, tilt.toShade());
+      ? Background._(0, tilt.toShade())
+      : Background._(tilt.toShade(), 0);
 
   @override
   Widget build(BuildContext context) => Row(
