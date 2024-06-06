@@ -3,8 +3,12 @@ import 'package:sensors_plus/sensors_plus.dart';
 
 extension Calibration on AsyncSnapshot<AccelerometerEvent> {
   static double _fix = 0;
+  static double? _weightCenter;
 
-  void calibrate() => _fix = data == null ? 0 : data!.y;
+  void calibrate(double weightCenter) {
+    _fix = data == null ? 0 : data!.y;
+    _weightCenter = weightCenter;
+  }
 
   double? get fixedY => data == null
       ? null

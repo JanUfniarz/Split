@@ -5,4 +5,6 @@ extension ThemeAccess on BuildContext {
       .floatingActionButtonTheme.shape;
 
   TextTheme get texts => Theme.of(this).textTheme;
+
+  double get screenMiddle => MediaQuery.of(this).size.width / 2;
 }

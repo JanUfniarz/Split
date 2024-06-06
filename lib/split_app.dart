@@ -27,13 +27,13 @@ class _SplitAppState extends State<SplitApp> {
         floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
         floatingActionButton: MenuButton(
           onModeChange: (mode) => setState(
-              () => content = Content(mode, snapshot)
+              () => content = Content(mode)
           ),
         ),
         body: Stack(
           children: <Widget>[
             Background(snapshot.fixedY),
-            content ?? Content(Mode.split, snapshot),
+            content ?? const Content(Mode.split),
           ],
         ),
       ),
