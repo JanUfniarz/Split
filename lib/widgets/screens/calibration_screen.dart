@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:split/extensions/theme_access.dart';
 
-import '../helpers/line_painter.dart';
+import '../../helpers/line_painter.dart';
 
 class CalibrationScreen extends StatefulWidget {
   final void Function(double weightCenter) onAccept;

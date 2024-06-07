@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:split/extensions/theme_access.dart';
 
-import '../enums/mode.dart';
+import '../../enums/mode.dart';
 
 class MenuButton extends StatelessWidget {
   final void Function(Mode mode) onModeChange;

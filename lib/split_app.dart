@@ -5,7 +5,7 @@ import 'package:split/config/theme.dart';
 import 'package:split/extensions/calibration.dart';
 import 'package:split/widgets/background.dart';
 import 'package:split/widgets/content.dart';
-import 'package:split/widgets/menu_button.dart';
+import 'package:split/widgets/buttons/menu_button.dart';
 import 'package:split/enums/mode.dart';
 
 class SplitApp extends StatefulWidget {
