@@ -17,11 +17,12 @@ class MenuButton extends StatelessWidget {
     shape: context.fabShape!,
     icon: Icons.menu,
     direction: SpeedDialDirection.down,
-    children: List.generate(3, (index) => SpeedDialChild(
+    children: List.generate(Mode.values.length, (index) => SpeedDialChild(
       child: Icon([
         Icons.compass_calibration_outlined,
         Icons.eco_outlined,
-        Icons.scale_outlined
+        Icons.scale_outlined,
+        Icons.info_outline
       ][index]),
       onTap: () => onModeChange(Mode.values[index]),
     ))

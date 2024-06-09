@@ -10,6 +10,8 @@ extension Calibration on AsyncSnapshot<AccelerometerEvent> {
     _weightCenter = weightCenter;
   }
 
+  double? get weightCenter => _weightCenter;
+
   double? get fixedY => data == null
       ? null
       : data!.y - _fix;

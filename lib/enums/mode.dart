@@ -1,5 +1,7 @@
 enum Mode {
   calibration,
   split,
-  scale
+  scale,
+  // Debug
+  debug,
 }
