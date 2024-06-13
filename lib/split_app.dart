@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
-
 import 'package:split/config/theme.dart';
-import 'package:split/extensions/calibration.dart';
-import 'package:split/widgets/background.dart';
-import 'package:split/widgets/content.dart';
-import 'package:split/widgets/buttons/menu_button.dart';
 import 'package:split/enums/mode.dart';
+import 'package:split/extensions/calibration.dart';
+import 'package:split/helpers/content_factory.dart';
+import 'package:split/widgets/background.dart';
+import 'package:split/widgets/buttons/menu_button.dart';
 
 class SplitApp extends StatefulWidget {
   const SplitApp({super.key});
@@ -16,7 +15,7 @@ class SplitApp extends StatefulWidget {
 }
 
 class _SplitAppState extends State<SplitApp> {
-  Content? content;
+  Widget? content;
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -27,13 +26,13 @@ class _SplitAppState extends State<SplitApp> {
         floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
         floatingActionButton: MenuButton(
           onModeChange: (mode) => setState(
-              () => content = Content(mode)
+              () => content = contentFactory(mode, context)
           ),
         ),
         body: Stack(
           children: <Widget>[
             Background(snapshot.fixedY),
-            content ?? const Content(Mode.split),
+            content ?? contentFactory(Mode.split, context),
           ],
         ),
       ),
